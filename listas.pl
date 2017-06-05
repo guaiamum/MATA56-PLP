@@ -10,3 +10,19 @@ soma([],0).
 soma([H|T],S) :- 
     soma(T,G),
     S is H+G.
+
+% traducao
+traducao(one,um).
+traducao(two,dois).
+traducao(three,tres).
+traducao(four,quatro).
+traducao(five,cinco).
+traducao(six,seis).
+traducao(seven,sete).
+traducao(eight,oito).
+traducao(nine,nove).
+
+lista_trad([],[]).
+lista_trad([Hen|Ten], [Hpt|Tpt]) :-
+    traducao(Hen,Hpt),
+    lista_trad(Ten,Tpt).
