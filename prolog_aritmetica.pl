@@ -39,3 +39,8 @@ fatorial(N, Resultado) :-
     Recursao is N-1,
     fatorial(Recursao, Y),
     Resultado is N * Y.
+
+%sucessor/2, que indica se o número X é sucessor do número Y.
+sucessor(X,Y) :-
+    %Y is X - 1;
+    X is Y + 1.
