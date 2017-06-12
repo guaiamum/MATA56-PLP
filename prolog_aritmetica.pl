@@ -30,12 +30,12 @@ ehpar(X) :-
     X > 1,
     Y is X - 2,
     ehpar(Y).
-
     
 %fatorial/2 : indica se o fatorial de X é Y. 
-fatorial(X,Res) :-
-    0 = X,
-    Res = 1.
-fatorial(X,Res) :-
-    X >= 1,
-    fatorial(X-1, Res).
+fatorial(0, Y) :-
+    Y = 1.
+fatorial(N, Resultado) :-
+    N >= 1,
+    Recursao is N-1,
+    fatorial(Recursao, Y),
+    Resultado is N * Y.
