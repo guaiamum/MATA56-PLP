@@ -25,11 +25,12 @@ par(X) :-
     0 is mod(X,2).
 
 %parNoMod/1 : reescrever regra anterior sem mod(X,Y)
+ehpar(0).
 ehpar(X) :-
     X > 1,
-    ehpar(div(X, 2)).
-ehpar(X) :-
-    1 is X.
+    Y is X - 2,
+    ehpar(Y).
+
     
 %fatorial/2 : indica se o fatorial de X é Y. 
 fatorial(X,Res) :-
