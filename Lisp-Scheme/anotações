@@ -1,0 +1,6 @@
+funções já implementadas:
+
+  map/collect
+  filter 
+  reduce/fold -> generaliza máx, min, produtorio, somatorio
+  

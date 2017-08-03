@@ -1,0 +1,66 @@
+(define (eh-impar num) 
+  (odd? num))
+
+(teste #f (eh-impar 2))
+(teste #t (eh-impar 3))
+
+;-----------------
+(teste #t (pair? '(2 3)))
+(teste #f (pair? 2))
+
+;-----------------
+(define (tem-impar lista)
+  (cond
+    ; lista vazia
+    ((null? lista) #f)
+   	((odd? (car lista)) #t)
+    (else 
+     (tem-impar (cdr lista))))
+  )
+     
+(teste #t (tem-impar '(1)))
+
+; ---
+(define (eh-impar num) 
+  (odd? num))
+; ---
+(define (tem-impar lista)
+  ; ---
+  (cond
+    ; lista vazia
+    ((null? lista) #f)
+    ; 1o elemento da lista é uma lista
+    ((pair? (car lista)) (tem-impar (car lista)))
+    ; 1o elemento da lista satisfaz à propriedade
+    ((eh-impar (car lista)) #t)
+    ; caso contrário
+    (else (tem-impar (cdr lista)))
+  )
+  ; ---
+)
+
+(teste #t (tem-impar '(2 (3) 4)))
+; --- escreva no mínimo 2 casos de teste
+(teste #f (tem-impar '()))
+(teste #t (tem-impar '(1 2 3 4)))
+;----------------- 
+; ---
+; se quiser, pode definir funções auxiliares
+(define (qntd lista)
+ (cond
+    ; lista vazia
+    ((null? lista) 0)
+    ; 1o elem é uma lista não-vazia
+    ((pair? (car lista))
+      (+ (qntd (car lista))
+         (qntd (cdr lista))))
+    ; 1o elemento é um átomo igual a x
+    (else (+ 1 (qntd (cdr lista))))
+ )
+)
+; ---
+;(define (lista-par lista))
+;(teste #t (lista-par '(m a t a 5 6)))
+; --- Crie no mínimo 2 testes adicionais
+(teste 3 (qntd '(1 2 3)))
+(teste 4 (qntd '(1 (2) 3)))

@@ -1,0 +1,87 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (filtro f lista)
+	(cond
+    ((null? lista) lista)
+    ((f (car lista))
+       (cons
+         (car lista)
+         (filtro f (cdr lista))))
+    (else
+       (filtro f (cdr lista)))))
+(teste '(7 9) (filtro (lambda (x) (> x 5)) '(7 4 3 9)))
+(teste '() (filtro (lambda (x) (> x 5)) '(1 2 3 4)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;Complete a função lista-par, que indica se a lista possui um número par de elementos, retornando ou #t ou #f. Restrições:
+; Não use nenhuma função pronta para calcular comprimento da lista.
+; Não retorne #t ou #f sem critério (isso poderia garantir metade da nota da questão, mas não será admitido).
+
+(define (comprimento lista)
+  (cond
+    ((null? lista) 0)
+    (else (+ 1 (comprimento (cdr lista))))))
+
+(teste 0 (comprimento '()))
+(teste 1 (comprimento '(x)))
+(teste 2 (comprimento '(x 5)))
+(teste 3 (comprimento '(x 5 y)))
+
+; ---
+; se quiser, pode definir funções auxiliares
+; ---
+;(define (lista-par lista)
+;  (= 0 (mod (comprimento lista) 2)))
+
+(define (lista-par lista)
+  (cond
+    ((null? lista) #t)
+    ((null? (cdr lista)) #f)
+    (else (lista-par (cddr lista)))))
+
+(teste #t (lista-par '(m a t a 5 6)))
+; --- Crie no mínimo 2 testes adicionais
+(teste #t (lista-par '()))
+(teste #f (lista-par '(1 2 3)))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Usando recusão profunda, escreva uma função para indicar se a lista de entrada (na qual todos os átomos são números) possui algum número ímpar. Retorne #t ou #f. Dica: use mod para retornar o resto da divisão entre dois números inteiros.
+; ---
+(define (eh-impar num) (= 1 (mod num 2)))
+(teste #t (eh-impar 1))
+(teste #f (eh-impar 0))
+; ---
+(define (tem-impar lista)
+  ; ---
+  (cond
+    ; lista vazia
+    ((null? lista) #f)
+    ; 1o elemento da lista é uma lista
+    ((pair? (car lista))
+       (or 
+         (tem-impar (car lista))
+         (tem-impar (cdr lista))))
+    ; 1o elemento da lista satisfaz à propriedade
+    ((eh-impar (car lista)) #t)
+    ; caso contrário
+    (else (tem-impar (cdr lista)))
+	)
+  ; ---
+)
+(teste #t (tem-impar '(2 (3) 4)))
+; --- escreva no mínimo 2 casos de teste
+(teste #f (tem-impar '()))
+(teste #t (tem-impar '((1 2) 3 4)))
+(teste #t (tem-impar '((2 2) 3 4)))
+(teste #t (tem-impar '((1 2) 4 4)))
+(teste #f (tem-impar '((2 2) 4 4)))
+(teste #t (tem-impar '(1 2 3 4)))
+(teste #t (tem-impar '(0 1 2 3 4)))
+(teste #t (tem-impar '(0 (1 2 3 4))))
+(teste #t (tem-impar '(0 (2 3 4))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
