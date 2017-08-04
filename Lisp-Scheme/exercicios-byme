@@ -65,4 +65,71 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(teste #f (member 0 '()))
+(teste '(1) (member 1 '(0 1)))
+(teste #f (member 4 '(1 2 3)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (is-set lista)
+  (cond
+   ((null? lista) #t)
+   ((member (car lista) (cdr lista)) #f)
+   (else 
+    (is-set (cdr lista)))))
+; testes
+(teste #t (is-set '()))
+(teste #t (is-set '(1)))
+(teste #t (is-set '(1 2 3)))
+(teste #f (is-set '(1 1 2)))
+(teste #f (is-set '(1 2 1)))
+(teste #f (is-set '(1 2 3 2 5)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (freq x lista)
+  (cond 
+   ((null? lista) 0)
+   ((equal? x (car lista)) (+ 1 (freq x (cdr lista))))
+   (else
+    (+ 0 (freq x (cdr lista))))))
+    
+; testes
+(teste 1 (freq 2 '(1 2 3)))
+(teste 2 (freq 1 '(1 1 2)))
+(teste 2 (freq 1 '(1 2 1)))
+(teste 0 (freq 3 '(1 2 1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (qtd-pares lista)
+  (cond 
+   ((null? lista) 0)
+   ((even? (car lista)) (+ 1 (qtd-pares (cdr lista))))
+   (else
+    (+ 0 (qtd-pares (cdr lista))))))
+    
+; testes
+(teste 1 (qtd-pares '(1 2 3)))
+(teste 2 (qtd-pares '(2 1 2)))
+(teste 2 (qtd-pares '(1 2 2)))
+(teste 0 (qtd-pares '(1 3 1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (dobra-tudo lista)
+  (cond
+    ((null? lista) '())
+    (else 
+     (cons (* 2 (car lista)) (dobra-tudo (cdr lista)))
+     )))
+
+; testes
+(teste '(2 4 6) (dobra-tudo '(1 2 3)))
+(teste '(4 2 4) (dobra-tudo '(2 1 2)))
+(teste '(2 4 4) (dobra-tudo '(1 2 2)))
+(teste '(2) (dobra-tudo '(1)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 
