@@ -1,0 +1,68 @@
+(define (maior-de-idade idade) 
+  (cond 
+   ((>= idade 18) #t)
+   (else #f)))
+; testes
+(teste #t (maior-de-idade 25))
+(teste #f (maior-de-idade 15))
+(teste #t (maior-de-idade 18))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (imc peso altura) 
+  (/ peso (* altura altura))
+  )
+; testes
+(teste 23.148148148148145 (imc 75 1.80))
+(teste 30.864197530864196 (imc 100 1.80))
+(teste 15.495867768595039 (imc 75 2.20))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (imc peso altura) 
+  (/ peso (* altura altura))
+  )
+
+(define (obesidade peso altura)
+  (cond
+   ((< (imc peso altura) 20) 'abaixoDoPeso)
+   ((> (imc peso altura) 30) 'obeso)
+   (else 'neutro)
+   ))
+
+; testes
+(teste 'abaixoDoPeso (obesidade 40 1.80))
+(teste 'neutro (obesidade 75 1.80))
+(teste 'obeso (obesidade 100 1.80))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (fib n) 
+  (cond 
+   ((= n 1) 1)
+   ((= n 2) 1)
+   (else 
+    (+ (fib (- n 1)) (fib (- n 2))))))
+; testes
+(teste 1 (fib 1))
+(teste 1 (fib 2))
+(teste 2 (fib 3))
+(teste 3 (fib 4))
+(teste 5 (fib 5))
+(teste 8 (fib 6))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (compr lista)
+  (cond
+		((null? lista) 0)
+		(else 
+   		(+ 1 (compr (cdr lista))))))
+; testes
+(teste 0 (compr '()))
+(teste 1 (compr '(1)))
+(teste 3 (compr '(1 2 3)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
