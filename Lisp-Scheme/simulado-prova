@@ -66,3 +66,17 @@
 (teste #f (lista-par '(1 '(2 3) 2)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(define (filtro f lista)
+  (cond
+    ((null? lista) '())
+    ((f (car lista)) 
+      (cons
+        (car lista)
+        (filtro f (cdr lista))))
+   (else 
+     (filtro f (cdr lista)))))
+
+;;;;;;
+(teste '(7 9) (filtro (lambda (x) (> x 5)) '(7 4 3 9)))
+(teste '(5 5) (filtro (lambda (x) (= x 5)) '(7 5 5 9)))
