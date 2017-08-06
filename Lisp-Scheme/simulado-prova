@@ -44,23 +44,25 @@
 (teste #f (tem-impar '()))
 (teste #t (tem-impar '(1 2 3 4)))
 ;----------------- 
-; ---
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; se quiser, pode definir funções auxiliares
 (define (qntd lista)
  (cond
-    ; lista vazia
+    ; lista vazia é 0
     ((null? lista) 0)
-    ; 1o elem é uma lista não-vazia
-    ((pair? (car lista))
-      (+ (qntd (car lista))
-         (qntd (cdr lista))))
-    ; 1o elemento é um átomo igual a x
-    (else (+ 1 (qntd (cdr lista))))
- )
-)
-; ---
-;(define (lista-par lista))
+  	;else + 1
+    (else (+ 1 (qntd (cdr lista))))))
+
+(teste 3 (qntd '(1 2 3)))
+;;;;;;;;;;;;p
+(define (lista-par lista)
+  (cond 
+   ((even? (qntd lista)) #t)
+   (else #f)))
 ;(teste #t (lista-par '(m a t a 5 6)))
 ; --- Crie no mínimo 2 testes adicionais
-(teste 3 (qntd '(1 2 3)))
-(teste 4 (qntd '(1 (2) 3)))
+(teste #f (lista-par '(1 2 3)))
+(teste #t (lista-par '(1 '())))
+(teste #f (lista-par '(1 '(2 3) 2)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
